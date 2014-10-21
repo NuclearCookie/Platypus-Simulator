@@ -28,9 +28,9 @@ public class MicrophoneListener : MonoBehaviour {
 	private float[] samples; 			//Samples
 	private float[] spectrum;			//Spectrum
 
-    private bool Kissing = false;
-    private float DelayTime = 1.0f;
-    public float MaxDelayTime = 1.0f;
+	private bool Kissing = false;
+	private float DelayTime = 1.0f;
+	public float MaxDelayTime = 1.0f;
 	private float triggerTime = 0.0f;
 	private int nrOfFramesLaziness;
 	private bool hasPressedKeyboardOrMouse = false;
@@ -59,7 +59,7 @@ public class MicrophoneListener : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-        Kissing = false;
+		Kissing = false;
 		StartMicListener();
 		
 	}
@@ -72,7 +72,7 @@ public class MicrophoneListener : MonoBehaviour {
 			GUI.DrawTexture(new Rect(5,5,Screen.width*0.05f,Screen.width*0.05f), mutedImg);	
 		}
 		
-    }
+	}
 
 	// Update is called once per frame
 	void Update () 
@@ -120,31 +120,31 @@ public class MicrophoneListener : MonoBehaviour {
 		}
 		
 		if (Time.deltaTime < MaxDelayTime)
-	        {
-	            DelayTime += Time.deltaTime;
-	        }
+			{
+				DelayTime += Time.deltaTime;
+			}
 		
 	}
 
-    public bool CanKiss()
-    {
+	public bool CanKiss()
+	{
 		bool canReallyKiss = false;
 		if(!hasPressedKeyboardOrMouse)
 		{
-    		canReallyKiss = Kissing && DelayTime >= MaxDelayTime && (triggerTime > MinKissLength && triggerTime < MaxKissLength);
+			canReallyKiss = Kissing && DelayTime >= MaxDelayTime && (triggerTime > MinKissLength && triggerTime < MaxKissLength);
 		}
 		else
 		{
 			canReallyKiss = Kissing && DelayTime >= MaxDelayTime;
 			hasPressedKeyboardOrMouse = false;
 		}
-        if (canReallyKiss)
-        {
-            DelayTime = 0.0f;
-        }
+		if (canReallyKiss)
+		{
+			DelayTime = 0.0f;
+		}
 		Kissing = false;
-        return canReallyKiss;
-    }
+		return canReallyKiss;
+	}
 	
 	//Starts the mic and plays the audio back in (near) real-time
 	private void StartMicListener()
