@@ -9,8 +9,6 @@ public class CloudMoveScript : MonoBehaviour {
 	public float MinSpeedOffset = 0.0f;
 	public float MaxSpeedOffset = 0.0f;
 	
-	Random Random = new Random();
-	
 	// Use this for initialization
 	void Start () {
 	

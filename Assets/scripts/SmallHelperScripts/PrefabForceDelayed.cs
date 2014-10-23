@@ -14,10 +14,10 @@ public class PrefabForceDelayed : MonoBehaviour {
 	private float elapsedTime = 0f;
 	private Transform objectToUse;
 	
-    void Start ()
-    {
-        audioSpawner = gameObject.AddComponent<AudioSpawner>();
-    }
+	void Start ()
+	{
+		audioSpawner = gameObject.AddComponent<AudioSpawner>();
+	}
 	// Update is called once per frame
 	void Update ()
 	{

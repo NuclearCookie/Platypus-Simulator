@@ -46,8 +46,6 @@ public class KissAttackScript : MonoBehaviour
 	
 	void OnCollisionEnter(Collision col)
 	{
-		Debug.Log(col.transform.tag);
-		
 		if(col.transform.tag == "KissMe")
 		{
 			audioSpawner.Play(hitClip, transform.position, false, 0.2f, 1.0f);

@@ -11,8 +11,6 @@ public class JumpingModel : MonoBehaviour {
 	private float cooldown;
 	private bool isJumping = false;
 	
-	float distToGround;
-	
 	void Start () 
 	{
 		if(!gameObject.GetComponent<Rigidbody>())
@@ -28,8 +26,6 @@ public class JumpingModel : MonoBehaviour {
 			temp.constraints &= ~RigidbodyConstraints.FreezeRotationY;
 			temp.useGravity = true;			
 			cooldown = Random.Range(minCooldown, maxCooldown);
-			
-			distToGround = collider.bounds.min.y;
 		}
 	}
 	

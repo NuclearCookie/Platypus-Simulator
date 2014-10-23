@@ -7,7 +7,7 @@ public class AudioSpawner : MonoBehaviour
 
     void Awake()
     {
-        parentObject = parentObject = GameObject.FindGameObjectWithTag("AudioParent");
+        parentObject = GameObject.FindGameObjectWithTag("AudioParent");
     }
     
     public AudioSource Play(AudioClip clip, Vector3 pos, bool loop, float volume, float pitch)
@@ -17,7 +17,7 @@ public class AudioSpawner : MonoBehaviour
 
         if (!parentObject)
         {
-            parentObject = parentObject = GameObject.FindGameObjectWithTag("AudioParent");
+            parentObject = GameObject.FindGameObjectWithTag("AudioParent");
         }
         go.transform.parent = parentObject.transform;
 		go.transform.position = pos;
