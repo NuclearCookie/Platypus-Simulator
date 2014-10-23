@@ -13,8 +13,6 @@ public class BalloonDeadScript : MonoBehaviour {
 	
 	private int CurrentHealth = 0;
 	private int MaxCurrentHealth = 1;
-
-	private Random Random;
 	
 	private static int MaximumScore = 0;
 	
