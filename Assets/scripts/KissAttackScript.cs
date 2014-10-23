@@ -3,44 +3,45 @@ using System.Collections;
 
 public class KissAttackScript : MonoBehaviour
 {
-	AudioSpawner audioSpawner = new AudioSpawner();
+	AudioSpawner audioSpawner;
 	public AudioClip hitClip;//, kissClip;
 	
-    public GameObject CameraObject;
-    public Vector3 Direction;
-    [SerializeField]
-    private float KissSpeed;
-    [SerializeField]
-    private float MaximumTime;
-    private float CurrentTime = 0.0f;
-	
-	void Awake()
+	public GameObject CameraObject;
+	public Vector3 Direction;
+	[SerializeField]
+	private float KissSpeed;
+	[SerializeField]
+	private float MaximumTime;
+	private float CurrentTime = 0.0f;
+
+	void Start()
 	{
+		audioSpawner = gameObject.AddComponent<AudioSpawner>();
 		//audioSpawner.Play(kissClip, transform.position, false, 0.2f, 1.0f);	
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-        CurrentTime += Time.deltaTime;
+		CurrentTime += Time.deltaTime;
 
-        transform.position += Direction * Time.deltaTime * KissSpeed;
+		transform.position += Direction * Time.deltaTime * KissSpeed;
 
-        transform.localScale *= 1.01f;
+		transform.localScale *= 1.01f;
 
-        if (CurrentTime > MaximumTime)
+		if (CurrentTime > MaximumTime)
 		{
-            Destroy(gameObject);
-        }
+			Destroy(gameObject);
+		}
 
-        Color color = transform.renderer.material.color;
-        color.a = 1.0f - CurrentTime / MaximumTime;
-        transform.renderer.material.color = color;
+		Color color = transform.renderer.material.color;
+		color.a = 1.0f - CurrentTime / MaximumTime;
+		transform.renderer.material.color = color;
 
-        Vector3 direction = transform.position - CameraObject.transform.position;
-        direction.Normalize();
+		Vector3 direction = transform.position - CameraObject.transform.position;
+		direction.Normalize();
 
-        transform.rotation = Quaternion.LookRotation(direction);
+		transform.rotation = Quaternion.LookRotation(direction);
 	}
 	
 	void OnCollisionEnter(Collision col)

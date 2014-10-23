@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PrefabForceDelayed : MonoBehaviour {
 	
-	AudioSpawner audioSpawner = new AudioSpawner();
+	AudioSpawner audioSpawner;
 	public AudioClip spawnClip;
 	
 	public Transform prefab;
@@ -14,6 +14,10 @@ public class PrefabForceDelayed : MonoBehaviour {
 	private float elapsedTime = 0f;
 	private Transform objectToUse;
 	
+    void Start ()
+    {
+        audioSpawner = gameObject.AddComponent<AudioSpawner>();
+    }
 	// Update is called once per frame
 	void Update ()
 	{
