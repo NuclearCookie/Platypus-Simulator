@@ -9,6 +9,8 @@ public class FirstPersonCamera : MonoBehaviour {
     public float maximumY = 60f;
     public bool flipY = false;
     public bool flipX = false;
+    public float deadZoneTreshold = 0.1f;
+
     private float rotationY = 0.0f;
     
     // Use this for initialization
@@ -21,16 +23,19 @@ public class FirstPersonCamera : MonoBehaviour {
     void Update()
     {
         float rotationX = 0;
-        
+
+        float xVelocity = Mathf.Abs(Input.gyro.rotationRateUnbiased.x) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.x : 0;
+        float yVelocity = Mathf.Abs(Input.gyro.rotationRateUnbiased.y) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.y : 0;
+
         if (!flipX)
-            rotationX = transform.localEulerAngles.y + Input.gyro.rotationRateUnbiased.x * sensitivityX;
+            rotationX = transform.localEulerAngles.y + xVelocity * sensitivityX;
         else
-            rotationX = transform.localEulerAngles.y - Input.gyro.rotationRateUnbiased.x * sensitivityX;
+            rotationX = transform.localEulerAngles.y - xVelocity * sensitivityX;
 
         if (!flipY)
-            rotationY += Input.gyro.rotationRateUnbiased.y * sensitivityY;
+            rotationY += yVelocity * sensitivityY;
         else
-            rotationY -= Input.gyro.rotationRateUnbiased.y * sensitivityY;
+            rotationY -= yVelocity * sensitivityY;
 
         rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
@@ -39,6 +44,8 @@ public class FirstPersonCamera : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.D))
         {
             Debug.Log(Input.gyro.rotationRateUnbiased);
+            Debug.Log(xVelocity);
+            Debug.Log(yVelocity);
         }
     }
     
