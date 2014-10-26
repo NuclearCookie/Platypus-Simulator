@@ -71,6 +71,36 @@ public class MicrophoneListener : MonoBehaviour {
         StartMicListener();
         
     }
+
+    //Starts the mic and plays the audio back in (near) real-time
+    private void StartMicListener()
+    {
+        Init();
+
+        if (Microphone.devices.Length > 0)
+        {
+            audio.clip = Microphone.Start(null, true, 1, AudioSettings.outputSampleRate);
+            while (!(Microphone.GetPosition(null) > 0))
+            {
+            }
+            audio.Play();
+            audio.mute = true;
+            audio.loop = true;
+            enabled = true;
+            if (Debugging)
+            {
+                Debug.Log("Microphone detected.");
+            }
+        }
+        else
+        {
+            enabled = false;
+            if (Debugging)
+            {
+                Debug.LogWarning("NO Microphone detected!");
+            }
+        }
+    }
     
     void OnGUI()
     {
@@ -165,35 +195,7 @@ public class MicrophoneListener : MonoBehaviour {
         return canReallyKiss;
     }
     
-    //Starts the mic and plays the audio back in (near) real-time
-    private void StartMicListener()
-    {
-        Init();
 
-        if (Microphone.devices.Length > 0)
-        {
-            audio.clip = Microphone.Start(null, true, 1, AudioSettings.outputSampleRate);
-            while (!(Microphone.GetPosition(null) > 0))
-            {
-            }
-            audio.Play();
-            audio.mute = true;
-            audio.loop = true;
-            enabled = true;
-            if (Debugging)
-            {
-                Debug.Log("Microphone detected.");
-            }
-        }
-        else
-        {
-            enabled = false;
-            if (Debugging)
-            {
-                Debug.LogWarning("NO Microphone detected!");
-            }
-        }
-    }
     
     private void StopMicListener()
     {

@@ -24,8 +24,15 @@ public class FirstPersonCamera : MonoBehaviour {
     {
         float rotationX = 0;
 
-        float xVelocity = Mathf.Abs(Input.gyro.rotationRateUnbiased.x) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.x : 0;
-        float yVelocity = Mathf.Abs(Input.gyro.rotationRateUnbiased.y) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.y : 0;
+        float xVelocity = 0.0f;
+        float yVelocity = 0.0f;
+
+#if UNITY_STANDALONE
+        xVelocity += Input.GetAxis("Mouse X");
+        yVelocity += Input.GetAxis("Mouse Y");
+#endif
+        xVelocity += Mathf.Abs(Input.gyro.rotationRateUnbiased.x) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.x : 0;
+        yVelocity += Mathf.Abs(Input.gyro.rotationRateUnbiased.y) > deadZoneTreshold ? Input.gyro.rotationRateUnbiased.y : 0;
 
         if (!flipX)
             rotationX = transform.localEulerAngles.y + xVelocity * sensitivityX;
