@@ -47,13 +47,6 @@ public class FirstPersonCamera : MonoBehaviour {
         rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
         transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            Debug.Log(Input.gyro.rotationRateUnbiased);
-            Debug.Log(xVelocity);
-            Debug.Log(yVelocity);
-        }
     }
     
     void OnApplicationFocus(bool focus){ Screen.showCursor = false; }
